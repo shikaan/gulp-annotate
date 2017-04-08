@@ -1,15 +1,15 @@
 {
   "name": "gulp-annotate",
   "version": "0.0.1",
-  "description": "Code less, annotate more!",
+  "description": "Make Gulp code for you!",
   "keywords": [
+    "gulpplugin",
     "gulp",
     "plugin",
-    "gulpplugin",
     "annotation"
   ],
   "main": "index.js",
-  "respository": "",
+  "respository": "https://github.com/shikaan/gulp-annotate",
   "scripts": {
     "test": "mocha ./test/*.specs.js",
     "test-ci": "nyc npm test && nyc report --reporter=text-lcov | coveralls",

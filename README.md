@@ -1,6 +1,9 @@
 # gulp-annotate #
 
-Make you gulp tasks write the boring parts of you code!
+[![Build Status](https://travis-ci.org/shikaan/gulp-annotate.svg?branch=master)](https://travis-ci.org/shikaan/gulp-annotate)
+[![Coverage Status](https://coveralls.io/repos/github/shikaan/gulp-annotate/badge.svg?branch=master)](https://coveralls.io/github/shikaan/gulp-annotate?branch=master)
+
+Makes Gulp write the boring parts of your code!
 
 
 ## Installation ##
@@ -13,7 +16,7 @@ Run
 
 ## Features ##
 
-- **`gulpAnnotate.load()`**: replaces `@Load` annotation with a list of file paths.
+- **`gulpAnnotate.load`**: replaces `@Load` annotation with a list of file paths.
 
 _Upcoming_
 - **`gulpAnnotate.objectIgnore`**: makes a property not enumerable
