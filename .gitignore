@@ -1,0 +1,4 @@
+node_modules
+result
+gulpfile.js
+test-file*.js
