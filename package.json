@@ -12,6 +12,7 @@
   "respository": "",
   "scripts": {
     "test": "mocha ./test/*.specs.js",
+    "test-ci": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "reporter": "nyc --reporter=html mocha './test/*.specs.js'",
     "lint": "eslint lib"
   },
