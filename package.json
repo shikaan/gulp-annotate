@@ -2,11 +2,17 @@
   "name": "gulp-annotate",
   "version": "0.0.1",
   "description": "Code less, annotate more!",
-  "keywords": ["gulp", "plugin", "gulpplugin", "annotation"],
+  "keywords": [
+    "gulp",
+    "plugin",
+    "gulpplugin",
+    "annotation"
+  ],
   "main": "index.js",
   "respository": "",
   "scripts": {
     "test": "mocha ./test/*.specs.js",
+    "reporter": "nyc --reporter=html mocha './test/*.specs.js'",
     "lint": "eslint lib"
   },
   "author": "Manuel Spagnolo <spagnolo.manu@gmail.com>",
@@ -18,7 +24,9 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "coveralls": "^2.13.0",
     "gulp": "^3.9.1",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "nyc": "^10.2.0"
   }
 }

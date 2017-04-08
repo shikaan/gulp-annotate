@@ -1,4 +1,5 @@
 node_modules
 result
 gulpfile.js
-test-file*.js
+coverage
+.nyc_output

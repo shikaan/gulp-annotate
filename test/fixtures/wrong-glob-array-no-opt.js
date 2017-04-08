@@ -1,3 +1,3 @@
 var MODULES = [
-    //@Load(label, '**/package.json', '**/index.js')
+    //@Load(label, '**/package.json')
 ]

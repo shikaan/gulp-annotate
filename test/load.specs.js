@@ -11,6 +11,20 @@ function fixtures(fileName) {
 }
 
 describe('Module: Load', () => {
+
+    it('should pass file when it isNull()', (done) => {
+        let stream = gulpAnnotate.load();
+        let emptyFile = {
+            isNull: () => true
+        };
+        stream.once('data', (data) => {
+            expect(data).to.equal(emptyFile);
+            done();
+        });
+        stream.write(emptyFile);
+        stream.end();
+    });
+
     describe('in stream mode', () => {
         it('should throw error', (done) => {
             let stream = gulpAnnotate.load();
@@ -64,6 +78,15 @@ describe('Module: Load', () => {
                 .once('error', (err) => {
                     expect(err.message).to.not.contain('Unable to parse GLOBS')
                     expect(err.message).to.contain('Unable to parse OPTIONS')
+                    done();
+                })
+        })
+
+        it('should throw in case of duplicate labels', (done) => {
+            gulp.src(fixtures('wrong-duplicate-label.js'))
+                .pipe(gulpAnnotate.load())
+                .once('error', (err) => {
+                    expect(err.message).to.contain('Duplicate label!')
                     done();
                 })
         })
