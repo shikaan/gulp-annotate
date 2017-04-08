@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/shikaan/gulp-annotate.svg?branch=master)](https://travis-ci.org/shikaan/gulp-annotate)
 [![Coverage Status](https://coveralls.io/repos/github/shikaan/gulp-annotate/badge.svg?branch=master)](https://coveralls.io/github/shikaan/gulp-annotate?branch=master)
 
+[![NPM](https://nodei.co/npm/gulp-annotate.png)](https://nodei.co/npm/gulp-annotate/)
+
 Makes Gulp write the boring parts of your code!
 
 
