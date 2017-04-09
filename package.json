@@ -9,7 +9,10 @@
     "annotation"
   ],
   "main": "index.js",
-  "respository": "https://github.com/shikaan/gulp-annotate",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shikaan/gulp-annotate"
+  },
   "scripts": {
     "test": "mocha ./test/*.specs.js",
     "test-ci": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
