@@ -7,7 +7,7 @@ const gulp = require('gulp');
 const gulpAnnotate = require('../');
 
 function fixtures(fileName) {
-    return path.join(__dirname, 'fixtures', fileName);
+    return path.join(__dirname, 'load-fixtures', fileName);
 }
 
 describe('Module: Load', () => {
@@ -16,6 +16,21 @@ describe('Module: Load', () => {
         let stream = gulpAnnotate.load();
         let emptyFile = {
             isNull: () => true
+        };
+        stream.once('data', (data) => {
+            expect(data).to.equal(emptyFile);
+            done();
+        });
+        stream.write(emptyFile);
+        stream.end();
+    });
+
+    it('should pass file when it not null, strem nor buffer', (done) => {
+        let stream = gulpAnnotate.load();
+        let emptyFile = {
+            isNull: () => false,
+            isStream: () => false,
+            isBuffer: () => false
         };
         stream.once('data', (data) => {
             expect(data).to.equal(emptyFile);
