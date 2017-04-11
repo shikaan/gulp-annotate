@@ -43,7 +43,7 @@ describe('Module: NoCache', () => {
     })
 
     describe('in buffer mode', () => {
-        it('should add timestamp versioning', (done) => {
+        it('should add timestamp versioning when path contains extension', (done) => {
             gulp.src(fixtures('ok.js'))
                 .pipe(gulpAnnotate.noCache())
                 .on('data', (data) => {
@@ -51,6 +51,40 @@ describe('Module: NoCache', () => {
 
                     expect(stringData).to.not.contain('//@NoCache');
                     expect(stringData).to.contain('my-diretive/my-directive.template.html?v=');
+
+                    done();
+                })
+        })
+
+        it('should add timestamp versioning when path does not contain extension', (done) => {
+            gulp.src(fixtures('ok-no-extension.js'))
+                .pipe(gulpAnnotate.noCache())
+                .on('data', (data) => {
+                    let stringData = data.contents.toString('utf-8');
+
+                    expect(stringData).to.not.contain('//@NoCache');
+                    expect(stringData).to.contain('my-diretive/my-directive?v=');
+
+                    done();
+                })
+        })
+
+        xit('should do correct replacement when there are symbols in filename')
+        xit('should do correct replacement when there are symbols in filename with no extension')
+        xit('should do correct replacement when path has length 1 with')
+        xit('should do correct replacement when path has length 1 with no extension')
+
+        it('should do nothing in case there is no annotations', (done) => {
+            let originalfile;
+            gulp.src(fixtures('ok-no-annotations.js'))
+                .on('data', (data) => {
+                    originalfile = data.contents.toString('utf-8');
+                })
+                .pipe(gulpAnnotate.noCache())
+                .on('data', (data) => {
+                    let stringData = data.contents.toString('utf-8');
+
+                    expect(stringData).to.equal(originalfile);
 
                     done();
                 })

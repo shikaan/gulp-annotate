@@ -149,7 +149,17 @@ Please do not forget the leading `//`.
 
 ## Contributing
 
-You can contribute to this project: clone the repo, write your wonderful code and before pull-requesting please run:
+You can contribute to this project. 
+
+1. Fork this repo;
+
+2. Install dependencies
+
+    npm install
+
+3. Write your wonderful code 
+
+4. Before pull-requesting please run:
 
 ```cmd
 npm test
