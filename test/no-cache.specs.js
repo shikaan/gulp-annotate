@@ -7,7 +7,7 @@ const gulp = require('gulp');
 const gulpAnnotate = require('../');
 
 function fixtures(fileName) {
-    return path.join(__dirname, 'load-fixtures', fileName);
+    return path.join(__dirname, 'no-cache-fixtures', fileName);
 }
 
 describe('Module: NoCache', () => {
@@ -43,6 +43,17 @@ describe('Module: NoCache', () => {
     })
 
     describe('in buffer mode', () => {
-        
+        it('should add timestamp versioning', (done) => {
+            gulp.src(fixtures('ok.js'))
+                .pipe(gulpAnnotate.noCache())
+                .on('data', (data) => {
+                    let stringData = data.contents.toString('utf-8');
+
+                    expect(stringData).to.not.contain('//@NoCache');
+                    expect(stringData).to.contain('my-diretive/my-directive.template.html?v=');
+
+                    done();
+                })
+        })
     })
 });
