@@ -4,7 +4,7 @@
             restrict: "E",
             scope: {},
             //@NoCache()
-            templateUrl: './my-directive_template'
+            templateUrl: 'my-directive_template'
         }
     }
 

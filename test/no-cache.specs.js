@@ -109,15 +109,40 @@ describe('Module: NoCache', () => {
         })
         
         it('should throw when path has length 1 with no extension', (done) => {
-            gulp.src(fixtures('ok-level-zero-no-ext.js'))
+            gulp.src(fixtures('wrong-level-zero-no-ext.js'))
                 .pipe(gulpAnnotate.noCache())
                 .once('error', (err) => {
-                    expect(err).to.exist();
+                    expect(err).to.exist;
+                    expect(err.message).to.contain('Unable to version the string')
                     done();
                 })
         })
 
-        xit('should do creect replacement when there are . or .. in path')
+        it('should not throw when path has length 1, has no extension, but starts with ./', (done) => {
+            gulp.src(fixtures('ok-level-zero-no-ext.js'))
+                .pipe(gulpAnnotate.noCache())
+                .on('data', (data) => {
+                    let stringData = data.contents.toString('utf-8');
+
+                    expect(stringData).to.not.contain('//@NoCache');
+                    expect(stringData).to.contain('./my-directive_template?v=');
+
+                    done();
+                })
+        })
+
+        it('should do correct replacement when there are . or .. in path', (done) => {
+            gulp.src(fixtures('ok-crazy-path.js'))
+                .pipe(gulpAnnotate.noCache())
+                .on('data', (data) => {
+                    let stringData = data.contents.toString('utf-8');
+
+                    expect(stringData).to.not.contain('//@NoCache');
+                    expect(stringData).to.contain('my-diretive/folder/.././my-directive?v=');
+
+                    done();
+                })
+        })
 
         it('should do nothing in case there is no annotations', (done) => {
             let originalfile;
