@@ -69,10 +69,55 @@ describe('Module: NoCache', () => {
                 })
         })
 
-        xit('should do correct replacement when there are symbols in filename')
-        xit('should do correct replacement when there are symbols in filename with no extension')
-        xit('should do correct replacement when path has length 1 with')
-        xit('should do correct replacement when path has length 1 with no extension')
+        it('should do correct replacement when there are symbols in filename', (done) => {
+            gulp.src(fixtures('ok-symbols.js'))
+                .pipe(gulpAnnotate.noCache())
+                .on('data', (data) => {
+                    let stringData = data.contents.toString('utf-8');
+
+                    expect(stringData).to.not.contain('//@NoCache');
+                    expect(stringData).to.contain('asd/my_diretive.zip/my-directive_template.htm?v=');
+
+                    done();
+                })
+        })
+
+        it('should do correct replacement when there are symbols in filename with no extension', (done) => {
+            gulp.src(fixtures('ok-symbols-no-ext.js'))
+                .pipe(gulpAnnotate.noCache())
+                .on('data', (data) => {
+                    let stringData = data.contents.toString('utf-8');
+
+                    expect(stringData).to.not.contain('//@NoCache');
+                    expect(stringData).to.contain('asd/my_diretive.zip/my-directive_template?v=');
+
+                    done();
+                })
+        })
+
+        it('should do correct replacement when path has length 1', (done) => {
+            gulp.src(fixtures('ok-level-zero.js'))
+                .pipe(gulpAnnotate.noCache())
+                .on('data', (data) => {
+                    let stringData = data.contents.toString('utf-8');
+
+                    expect(stringData).to.not.contain('//@NoCache');
+                    expect(stringData).to.contain('my-directive_template.html?v=');
+
+                    done();
+                })
+        })
+        
+        it('should throw when path has length 1 with no extension', (done) => {
+            gulp.src(fixtures('ok-level-zero-no-ext.js'))
+                .pipe(gulpAnnotate.noCache())
+                .once('error', (err) => {
+                    expect(err).to.exist();
+                    done();
+                })
+        })
+
+        xit('should do creect replacement when there are . or .. in path')
 
         it('should do nothing in case there is no annotations', (done) => {
             let originalfile;
