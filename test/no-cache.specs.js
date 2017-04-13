@@ -42,6 +42,21 @@ describe('Module: NoCache', () => {
         })
     })
 
+    it('should pass file when it\'s not null, stream nor buffer', (done) => {
+        let stream = gulpAnnotate.noCache();
+        let emptyFile = {
+            isNull: () => false,
+            isStream: () => false,
+            isBuffer: () => false
+        };
+        stream.once('data', (data) => {
+            expect(data).to.equal(emptyFile);
+            done();
+        });
+        stream.write(emptyFile);
+        stream.end();
+    });
+
     describe('in buffer mode', () => {
         it('should add timestamp versioning when path contains extension', (done) => {
             gulp.src(fixtures('ok.js'))
@@ -109,7 +124,7 @@ describe('Module: NoCache', () => {
         })
         
         it('should throw when path has length 1 with no extension', (done) => {
-            gulp.src(fixtures('wrong-level-zero-no-ext.js'))
+            gulp.src(fixtures('wrong-not-a-path.js'))
                 .pipe(gulpAnnotate.noCache())
                 .once('error', (err) => {
                     expect(err).to.exist;

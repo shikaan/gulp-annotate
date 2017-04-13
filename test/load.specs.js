@@ -25,7 +25,7 @@ describe('Module: Load', () => {
         stream.end();
     });
 
-    it('should pass file when it not null, strem nor buffer', (done) => {
+    it('should pass file when it not null, stream nor buffer', (done) => {
         let stream = gulpAnnotate.load();
         let emptyFile = {
             isNull: () => false,
