@@ -203,7 +203,7 @@ describe('Module: Load', () => {
 		
 		it('should replace correctly globs with globstars', (done) => {
             let fakeFile = new File({
-                contents: new Buffer('//@Load(label, ["lib/**/*.js"], {"base": "./", "posix": false})')
+                contents: new Buffer('//@Load(label, ["lib/**/*.js"], {"base": "./", "posix": true})')
             });
 
             let loader = gulpAnnotate.load();
@@ -212,14 +212,14 @@ describe('Module: Load', () => {
 
             loader.once('data', (file) => {
                 expect(file.isBuffer()).to.equal(true);
-                expect(file.contents.toString('utf-8')).to.equal('"lib\\load.js",\n"lib\\no-cache.js"')
+                expect(file.contents.toString('utf-8')).to.equal('"lib/load.js",\n"lib/no-cache.js"')
             })
             loader.once('end', () => {
                 done();
             })
         })
 		
-		it('should use correst separator', (done) => {
+		it('should use correct separator', (done) => {
             let fakeFile = new File({
                 contents: new Buffer('//@Load(label, ["lib/**/*.js"], {"base": "./", "posix": true})')
             });
