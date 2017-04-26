@@ -20,6 +20,8 @@ The annotation `@Load` is used this way
 
     - *base*: it's the base path from which the glob expressions should be computed. 
     For Node.js geeks, it's just a `path.relative`. For the Gulp geeks, it's just like the `base` option in `gulp.src`.
+	
+	- *posix*: if it's set to true, it will force the use of posix path separator (a.k.a. `/`), else it will use the system one.
 
 ## Example of application ##
 
